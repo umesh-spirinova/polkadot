@@ -11110,8 +11110,10 @@ dependencies = [
  "sp-api",
  "sp-core",
  "sp-keyring",
+ "strum",
  "substrate-test-utils",
  "test-parachain-undying",
+ "thiserror",
  "tokio",
 ]
 
