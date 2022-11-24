@@ -348,7 +348,6 @@ impl<T: Config> Pallet<T> {
 		let (checked_disputes, total_consumed_weight) = {
 			// Obtain config params..
 			let config = <configuration::Pallet<T>>::config();
-			let max_spam_slots = config.dispute_max_spam_slots;
 			let post_conclusion_acceptance_period =
 				config.dispute_post_conclusion_acceptance_period;
 
@@ -362,7 +361,6 @@ impl<T: Config> Pallet<T> {
 			let dispute_set_validity_check = move |set| {
 				T::DisputesHandler::filter_dispute_data(
 					set,
-					max_spam_slots,
 					post_conclusion_acceptance_period,
 					verify_dispute_sigs,
 				)
@@ -594,7 +592,6 @@ impl<T: Config> Pallet<T> {
 		}
 
 		let config = <configuration::Pallet<T>>::config();
-		let max_spam_slots = config.dispute_max_spam_slots;
 		let post_conclusion_acceptance_period = config.dispute_post_conclusion_acceptance_period;
 
 		// TODO: Better if we can convert this to `with_transactional` and handle an error if
@@ -608,7 +605,6 @@ impl<T: Config> Pallet<T> {
 			let dispute_statement_set_valid = move |set: DisputeStatementSet| {
 				T::DisputesHandler::filter_dispute_data(
 					set,
-					max_spam_slots,
 					post_conclusion_acceptance_period,
 					// `DisputeCoordinator` on the node side only forwards
 					// valid dispute statement sets and hence this does not
